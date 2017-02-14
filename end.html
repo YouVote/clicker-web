@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lesson End</title>
+        <script>
+			var errMsg=sessionStorage.getItem('endErrMsg');
+			var studResp=sessionStorage.getItem('studResp');
+            console.log(errMsg);
+            console.log(studResp);
+        </script>
+    </head>
+    <body>
+    	<h1>error message and student ans</h1>
+    	<h2>Student Answers</h2>
+    	<div id="studResp"></div>
+    	<h2>Error Message</h2>
+    	<div id="errMsg"></div>
+	    <script>
+		    var studRespDiv=document.getElementById("studResp");
+		    var errMsgDiv=document.getElementById("errMsg");
+		    studRespDiv.innerHTML=JSON.stringify(studResp);
+		    errMsgDiv.innerHTML=errMsg;
+	    </script>
+    </body>
+</html>
