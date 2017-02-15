@@ -1,22 +1,81 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>eClicker Home</title>
-		<meta name="format-detection" content="telephone=no">
-		<meta name="msapplication-tap-highlight" content="no">
-		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
-		<link rel="stylesheet" type="text/css" 
-			href="https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.css">
-		<script type="text/javascript" 
-			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script type="text/javascript"
-			src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+		<title>YouVote!</title>
+		<style>
+			body{
+				margin:0px;
+			 	height:100%;
+				width:100%;
+				display:table;
+				position:absolute;
+			}
+			#wallpaper{
+				background-image:url('https://2.bp.blogspot.com/-CP6B29XL04w/WKRCzbwHpNI/AAAAAAAAKvc/4yfOiR3MXpQSNFWLjkMAiqXdmRlrlhQIQCLcB/s1600/background-img.jpg');
+				background-position: 0 0;
+				background-repeat:no-repeat;
+				background-size:cover;
+				position: absolute;
+				left:0;right:0;bottom:0px;top:0;
+				text-align:center;
+				z-index: -1;
+			}
+			#middle{
+				text-align:center;display: table-cell;vertical-align: middle;
+			}
+			#youvote{
+				padding:0 0 50px 0;
+				font-size:160px;
+				font-family: Calibri,Arial,sans-serif;
+				text-shadow: 
+					-1px 1px 3px #333,
+					1px 1px 3px #333,
+					1px -1px 3px #333,
+					-1px -1px 3px #333,
+					-5px 5px 10px white,
+					5px 5px 10px white,
+					5px -5px 10px white,
+					-5px -5px 10px white,
+					-8px 8px 16px white,
+					8px 8px 16px white,
+					8px -8px 16px white,
+					-8px -8px 16px white,
+					0px 0px 10px white,
+					0px 0px 15px white,
+					0px 0px 25px white,
+					0px 0px 40px white,
+					0px 0px 60px white
+					;
+			}
+			#you{
+				color:#ff0000;
+			}
+			#vote{
+				color:rgb(0,176,240);
+			}
+			#lesson{
+				display: inline-block; 
+				white-space: nowrap;
+				background-color:rgba(255,255,255,0.9);
+				padding:10px;
+				-moz-border-radius: 10px;
+				-webkit-border-radius: 10px;
+				border: 3px solid #444;
+			}
+			#lesson input{
+				font-size:20px; 
+				padding:0px; 
+				margin:0px; 
+				vertical-align: middle;
+				font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+				font-weight: bold;
+			}
+		</style>
 		<script>
 			function beginLesson(lessonPlanText){
 				sessionStorage.setItem('lessonPlan', lessonPlanText);
 				window.location="hostlesson.html";
 			}
-			var fileDisplayArea;
 			function readTextFile (f) {
 			 var reader = new FileReader();
 			 reader.onload=function(){
@@ -43,18 +102,19 @@
 		</script>
 	</head>
 	<body>
-		<h2>eClicker</h2>
-		<fieldset data-role="controlgroup" data-type="horizontal">
-			<input type="file" id="fileInput"/>
-			<button id="submit">submit</button>
-		</fieldset>
-		<!-- add link to apk -->
-		<div id="fileDisplay"></div>
+		<div id="middle">
+			<header id="youvote"><span id="you">You</span><span id="vote">Vote</span></header>
+			<div id="lesson">
+				<input type="file" id="fileInput" style="width:600px;"> 
+				<input type="button" id="submit" value="    LAUNCH!    "/>
+			</div>
+		</div>
+		<div id="wallpaper" ></div>
 		<script>
 			(function init(){
 				var submitBtn = document.getElementById("submit")
 				var fileInput = document.getElementById("fileInput")
-				fileDisplayArea=document.getElementById("fileDisplay")
+				//fileDisplayArea=document.getElementById("fileDisplay")
 				submitBtn.onclick=function(){
 					readTextFile(fileInput.files[0])
 				}
