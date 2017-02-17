@@ -6,6 +6,7 @@ define(["./modulerouter","config"],function(modulerouter,config){
 			getConnectedStudents
 		){
 		var qnCore;
+		var currJsFile, currParams
 		var currStudResp;
 		var qnStemDiv,studAnsDiv;
 		this.passDivs=function(optDiv,respDiv){

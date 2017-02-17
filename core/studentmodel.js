@@ -34,14 +34,14 @@ define([],function(){
 			return socIdToUuid[socketId];
 		}
 
-		function studentClass(socketId,studentName){
-			this.socketId=socketId;
-			this.studentName=studentName;
+		function studentClass(initSocketId,initStudentName){
+			var socketId=initSocketId;
+			var studentName=initStudentName;
 			this.disconnectStudent=function(){
-				this.socketId=null;
+				socketId=null;
 			}
-			this.reconnectStudent=function(socketId){
-				this.socketId=socketId;   
+			this.reconnectStudent=function(newSocketId){
+				socketId=newSocketId;
 			}
 			this.relay=function(data){
 				// called by execQn to push question,
