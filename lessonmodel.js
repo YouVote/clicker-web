@@ -23,7 +23,7 @@ define([],function(){
 				execQn();
 			}else{// any other qId value leads to end.
 				// todo: refactor end() into its own function. 
-				sessionStorage.setItem('studResp', studResp);
+				sessionStorage.setItem('studResp', JSON.stringify(studResp));
 				sessionStorage.setItem('endErrMsg', "lesson ended");
 				window.location="end.html";
 			}

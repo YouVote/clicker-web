@@ -3,7 +3,7 @@ define([],function(){
 		this.socketError=function(errMsg){
 			// try to unify with end clicked in hostlesson 
 			if(typeof(studResp)=='undefined'){studResp=null;}
-			sessionStorage.setItem('studResp', studResp);
+			sessionStorage.setItem('studResp', JSON.stringify(studResp));
 			sessionStorage.setItem('endErrMsg', errMsg);
 			window.location="end.html";
 		}
