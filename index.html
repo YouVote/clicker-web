@@ -2,6 +2,9 @@
 <html>
 	<head>
 		<title>YouVote!</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
 		<style>
 			body{
 				margin:0px;
@@ -11,7 +14,7 @@
 				position:absolute;
 			}
 			#wallpaper{
-				background-image:url('https://2.bp.blogspot.com/-CP6B29XL04w/WKRCzbwHpNI/AAAAAAAAKvc/4yfOiR3MXpQSNFWLjkMAiqXdmRlrlhQIQCLcB/s1600/background-img.jpg');
+				background-image:url('https://1.bp.blogspot.com/-EFBh8zEwOqU/WLEiev7D52I/AAAAAAAAKww/0CAmoLWvSMAy2Wlfl-b4bXGWXy5blleYQCLcB/s1600/dscf3294.jpg');
 				background-position: 0 0;
 				background-repeat:no-repeat;
 				background-size:cover;
@@ -23,29 +26,21 @@
 			#middle{
 				text-align:center;display: table-cell;vertical-align: middle;
 			}
+			#header-band{
+				background-color: rgba(255,255,255,0.95);
+				padding:15px;
+			}
 			#youvote{
-				padding:0 0 50px 0;
 				font-size:160px;
-				font-family: Calibri,Arial,sans-serif;
-				text-shadow: 
-					-1px 1px 3px #333,
-					1px 1px 3px #333,
-					1px -1px 3px #333,
-					-1px -1px 3px #333,
-					-5px 5px 10px white,
-					5px 5px 10px white,
-					5px -5px 10px white,
-					-5px -5px 10px white,
-					-8px 8px 16px white,
-					8px 8px 16px white,
-					8px -8px 16px white,
-					-8px -8px 16px white,
-					0px 0px 10px white,
-					0px 0px 15px white,
-					0px 0px 25px white,
-					0px 0px 40px white,
-					0px 0px 60px white
-					;
+				font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif; 
+				font-weight:bold;
+				padding:0px;
+				/* prevents text selection */
+				-webkit-user-select: none;  /* Chrome all / Safari all */
+				-moz-user-select: none;     /* Firefox all */
+				-ms-user-select: none;      /* IE 10+ */
+				user-select: none;          /* Likely future */  
+				cursor:default;
 			}
 			#you{
 				color:#ff0000;
@@ -54,21 +49,9 @@
 				color:rgb(0,176,240);
 			}
 			#lesson{
-				display: inline-block; 
-				white-space: nowrap;
-				background-color:rgba(255,255,255,0.9);
-				padding:10px;
-				-moz-border-radius: 10px;
-				-webkit-border-radius: 10px;
-				border: 3px solid #444;
-			}
-			#lesson input{
-				font-size:20px; 
-				padding:0px; 
-				margin:0px; 
-				vertical-align: middle;
-				font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-				font-weight: bold;
+				width:760px;
+				margin:0 auto;
+				padding-bottom:20px;
 			}
 		</style>
 		<script>
@@ -77,17 +60,17 @@
 				window.location="hostlesson.html";
 			}
 			function readTextFile (f) {
-			 var reader = new FileReader();
-			 reader.onload=function(){
-			 	var lessonPlan = reader.result;
-				beginLesson(lessonPlan);
-			 }
-			 reader.readAsText(f);
+				var reader = new FileReader();
+				reader.onload=function(){
+					var lessonPlan = reader.result;
+					beginLesson(lessonPlan);
+				}
+				reader.readAsText(f);
 			}
 
 			function getParams() {
-				  var prmstr = window.location.search.substr(1);
-				  return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+				var prmstr = window.location.search.substr(1);
+				return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
 			}
 
 			function transformToAssocArray( prmstr ) {
@@ -103,18 +86,50 @@
 	</head>
 	<body>
 		<div id="middle">
-			<header id="youvote"><span id="you">You</span><span id="vote">Vote</span></header>
-			<div id="lesson">
-				<input type="file" id="fileInput" style="width:600px;"> 
-				<input type="button" id="submit" value="    LAUNCH!    "/>
+			<div id="header-band">
+				<header id="youvote">
+					<span id="you">You</span><span id="vote">Vote</span>
+				</header>
+				<div id="lesson" class="input-group input-group-lg">
+
+					<label class="input-group-btn">
+						<span class="btn btn-default"> Browse&hellip; <input type="file" id="fileInput" style="display: none;" multiple></span>
+					</label>
+					<input type="text" class="form-control" value="Lesson File" readonly />
+					<span class="input-group-btn">
+						<button id="submit" class="btn btn-default" type="button"> LAUNCH! </button>
+					</span>
+				</div>
 			</div>
 		</div>
 		<div id="wallpaper" ></div>
 		<script>
 			(function init(){
+				// Restyle file input
+				// We can attach the `fileselect` event to all file inputs on the page
+				$(document).on('change', ':file', function() {
+					var input = $(this),
+						numFiles = input.get(0).files ? input.get(0).files.length : 1,
+						label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+					input.trigger('fileselect', [numFiles, label]);
+				});
+
+				// We can watch for our custom `fileselect` event like this
+				$(document).ready( function() {
+					$(':file').on('fileselect', function(event, numFiles, label) {
+						var input = $(this).parents('.input-group').find(':text'),
+							log = numFiles > 1 ? numFiles + ' files selected' : label;
+						if( input.length ) {
+							input.val(log);
+						} else {
+							if( log ) alert(log);
+						}
+					});
+				});
+
+				// initialize file input
 				var submitBtn = document.getElementById("submit")
 				var fileInput = document.getElementById("fileInput")
-				//fileDisplayArea=document.getElementById("fileDisplay")
 				submitBtn.onclick=function(){
 					readTextFile(fileInput.files[0])
 				}
