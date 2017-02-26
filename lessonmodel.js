@@ -35,6 +35,7 @@ define([],function(){
 			currParams=qnSpec.modParams;// modParams
 			currStem=qnSpec.qnStem;// qnStem
 			qnStemDiv.innerHTML="<div class='ui-content'>"+currStem+"</div>";
+			MathJax.Hub.Typeset(qnStemDiv)
 			qnHandler.execQn(currJsFile,currParams,studResp[qnNo]);
 			lessonCtrlObj.update(qnNo,lessonPlan,studResp);
 		}

@@ -22,13 +22,13 @@ define([],function(){
 			}
 		}
 		this.showEndBtn=function(){
-			$(nextBtn).html("end");
+			$(nextBtn).html("end <span class='glyphicon glyphicon-menu-right'></span>");
 		}
 		this.hidePrevBtn=function(){
 			prevBtn.style="visibility:hidden;"
 		}
 		this.showNextBtn=function(){
-			$(nextBtn).html("next");
+			$(nextBtn).html("next <span class='glyphicon glyphicon-menu-right'></span>");
 		}
 		this.showPrevBtn=function(){
 			prevBtn.style="visibility:visible;"

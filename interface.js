@@ -1,5 +1,5 @@
 define([],function(){
-	return function interfaceHandler(titleDiv){
+	return function interfaceHandler(paginator,lessonIdDom){
 		this.socketError=function(errMsg){
 			// try to unify with end clicked in hostlesson 
 			if(typeof(studResp)=='undefined'){studResp=null;}
@@ -7,9 +7,9 @@ define([],function(){
 			sessionStorage.setItem('endErrMsg', errMsg);
 			window.location="end.html";
 		}
-		this.updateLessonId=function(lessonId){
-			titleDiv.innerHTML="Lesson <font class='gameId'>"+lessonId+"</font>";
-			window.location="#host";
+		this.socketConnected=function(lessonId){
+			lessonIdDom.innerHTML=lessonId
+			paginator.setDom("page-lesson")
 		}
 		
 		this.studentEnter=function(socketId,data){
