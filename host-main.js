@@ -63,6 +63,10 @@ var paginator=new (function(){
 		}
 	}
 })()
+var optFrameResize=function(){
+	var obj=document.getElementById("qnOpts");
+	obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+}
 
 require(['jquery'],function(){
 	$('head').append('<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">');
