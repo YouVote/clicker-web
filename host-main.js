@@ -12,7 +12,6 @@ require.config({
 		"mathjax": "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax",
 		"d3js":"https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.0/d3.min",
 		
-
 		"interface":"interface",
 		"lessonctrl":"lessonctrl",
 		"lessonmodel":"lessonmodel",
@@ -39,7 +38,13 @@ require.config({
 		},
 	}
 });
+var $;
+var opt$;
+function passOptsJquery(_$){
+	opt$=_$;
+}
 
+// creating and instantiating object from anonymous class
 var paginator=new (function(){
 	var domArr={}
 	this.addDom=function(domName){
@@ -69,6 +74,7 @@ require(['jquery'],function(){
 	});
 	require(['bootstrap'])
 	require(['mathjax'])
+	//document.getElementById("qnOpts").contentWindow.testFunction();
 })
 
 require(["webcore","interface","lessonctrl","lessonmodel","config"],
@@ -108,7 +114,8 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine,config){
 		studentModelObj.getStudents
 		);
 	qnHandler.passDivs(
-		document.getElementById("qnOpts"),
+		//document.getElementById("testQnOpts"),
+		document.getElementById("qnOpts").contentWindow.document.getElementById("opt"),
 		document.getElementById("qnResp")
 		);
 	lessonObj=new lessonModelEngine(
@@ -116,4 +123,6 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine,config){
 		lessonPlan
 		);
 	lessonObj.playQnById(0);
+
+	//document.getElementById("qnOpts").contentWindow.testFunction();
 })

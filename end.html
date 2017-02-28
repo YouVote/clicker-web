@@ -4,7 +4,7 @@
         <title>Lesson End</title>
         <script>
 			var errMsg=sessionStorage.getItem('endErrMsg');
-			var studResp=sessionStorage.getItem('studResp');
+			var studResp=sessionStorage.getItem('studRespData');
         </script>
     </head>
     <body>
@@ -14,7 +14,7 @@
     	<h2>Error Message</h2>
     	<div id="errMsg"></div>
 	    <script>
-		    var studRespDiv=document.getElementById("studRespData");
+		    var studRespDiv=document.getElementById("studResp");
 		    var errMsgDiv=document.getElementById("errMsg");
 		    studRespDiv.innerHTML=studResp;
 		    errMsgDiv.innerHTML=errMsg;
