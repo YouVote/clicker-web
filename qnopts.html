@@ -3,8 +3,17 @@
 	<head>
 		<title>YouVote Options</title>
 		<script data-main="opts-main" src="require.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.css">
+		<style>			
+			.ui-controlgroup, fieldset.ui-controlgroup{
+				padding:0px !important;margin:0px !important;
+			}
+			.ui-mobile .ui-page{
+				min-height:0px !important;
+			}
+		</style>
 	</head>
-	<body style="overflow:hidden;background-color: white;">
-	<div data-role="page" style="background-color: white;" id="opt"></div>
+	<body style="background-color:white;overflow:hidden;">
+	<div data-role="page" style="background-color:white;overflow:hidden;" id="opt"></div>
 	</body>
 </html>

@@ -1,7 +1,3 @@
-*{
-    margin:0px;padding:0px;
-}
-
 .studentIcon{
     background-image:url(https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/images/icons-svg/user-black.svg); 
     background-repeat: no-repeat;background-size: cover;
@@ -22,21 +18,4 @@
 }
 .studentIcon.unanswered{
     border-color:white;
-}
-#host{
-    background-color:#ccccff;    
-}
-
-#lesson-header{
-    float:left;
-    width:300px;
-    height:100%;
-    background-color:#ccffff;
-}
-
-#lesson-content{
-    margin:0 auto;
-    width:1000px;
-    float:right;
-    background-color:#ffffcc;
 }

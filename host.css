@@ -1,0 +1,87 @@
+*{
+	margin:0px;padding:0px;
+}
+body{
+	margin:0px;
+ 	height:100%;
+	width:100%;
+	display:table;
+	position:absolute;
+}
+.page{
+	margin:0px;
+ 	height:100%;
+	width:100%;
+	display:table;
+	position:absolute;
+}
+#connecting-wallpaper{
+	background-position: 0 0;
+	background-repeat:no-repeat;
+	background-size:cover;
+	position: absolute;
+	left:0;right:0;bottom:0px;top:0;
+	text-align:center;
+	z-index: -1;
+}
+#connecting-middle{
+	text-align:center;display: table-cell;vertical-align: middle;
+}
+#connecting-header-band{
+	background-color: rgba(255,255,255,0.95);
+	padding:15px;
+}
+#connecting-status{
+	width:760px;
+	margin:0 auto;
+	height:46px;
+	padding-bottom:20px;
+	font-size:30px;
+	color:#333;
+}
+.youvote{
+	font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif; 
+	font-weight:bold;
+	padding:0px;
+	/* prevents text selection */
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */  
+	cursor:default;
+}
+.you{
+	color:#ff0000;
+}
+.vote{
+	color:rgb(0,176,240);
+}
+.youvote-line{
+	font-size:7px;text-align:center;background-color:white;
+}
+
+#lesson-header{
+	height:100%;width:250px;
+	border-right:1px solid #999;
+	border-left:1px solid #999;
+	padding:0;overflow:hidden;
+	background-color:#eee;
+	position: absolute; top:0px;left:0px;
+}
+#lesson-id{
+	width:248px;height:70px; 
+	padding:10px 0 10px 0;
+	font-family:'Lucida Sans Typewriter','Lucida Console','Courier New';
+	text-align:center; letter-spacing: 4px; font-size:35px;
+	vertical-align:middle;
+	background-color:white;
+}
+#lesson-content{
+	margin-left:250px; width:auto; height:100%; overflow:hidden;
+}
+#nav-btns{
+	width:248px;padding:15px 10px 15px 10px;background-color:white;
+}
+#nav-btns > button{
+	width:76px;
+}

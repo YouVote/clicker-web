@@ -21,7 +21,6 @@ require.config({
 		"mathjax":{
 			exports:"MathJax",
 			init:function(){
-				console.log("MathJax: "+MathJax.version)
 				MathJax.Hub.Config({
 					HTML: ["input/TeX","output/HTML-CSS"],
 					TeX: { extensions: ["AMSmath.js","AMSsymbols.js"],
@@ -43,6 +42,12 @@ var opt$;
 function passOptsJquery(_$){
 	opt$=_$;
 }
+var optFrameResize=function(){
+	var obj=document.getElementById("qnOpts");
+	var iframeOptDiv=obj.contentWindow.document.getElementById("opt");
+	iframeOptDiv.style.height=iframeOptDiv.firstChild.offsetHeight+"px";
+	obj.style.height = iframeOptDiv.firstChild.offsetHeight+"px";
+}
 
 // creating and instantiating object from anonymous class
 var paginator=new (function(){
@@ -63,17 +68,15 @@ var paginator=new (function(){
 		}
 	}
 })()
-var optFrameResize=function(){
-	var obj=document.getElementById("qnOpts");
-	obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-}
 
 require(['jquery'],function(){
 	$('head').append('<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">');
+	$('head').append('<link rel="stylesheet" type="text/css" href="host.css">');
+	$('head').append('<link rel="stylesheet" type="text/css" href="studentview.css">');
 	$(document).ready(function(){
 		paginator.addDom("page-connecting")
 		paginator.addDom("page-lesson")		
-		paginator.addDom("page-confirm-end")
+		paginator.addDom("page-confirm")
 		paginator.setDom("page-connecting");
 	});
 	require(['bootstrap'])
@@ -88,7 +91,7 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine,config){
 	var socketURL=config.socketURL;
 	interface=new interfaceHandler(
 		paginator,
-		document.getElementById("lessonId")
+		document.getElementById("lesson-id")
 		);
 	lessonCtrlObj=new lessonCtrlEngine(
 		document.getElementById("prevBtn"),
@@ -97,7 +100,7 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine,config){
 		);
 	var webCoreObj=new webCore();
 	studentViewObj=new webCoreObj.studentViewEngine(
-		document.getElementById("studentBox")
+		document.getElementById("student-box")
 		);
 	studentModelObj=new webCoreObj.studentModelEngine(
 		studentViewObj.addStudent,
@@ -127,6 +130,4 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine,config){
 		lessonPlan
 		);
 	lessonObj.playQnById(0);
-
-	//document.getElementById("qnOpts").contentWindow.testFunction();
 })
