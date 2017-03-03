@@ -1,23 +1,84 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Lesson End</title>
-        <script>
+	<head>
+		<title>Lesson End</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+		<script>
 			var errMsg=sessionStorage.getItem('endErrMsg');
 			var studResp=sessionStorage.getItem('studRespData');
-        </script>
-    </head>
-    <body>
-    	<h1>error message and student ans</h1>
-    	<h2>Student Answers</h2>
-    	<div id="studResp"></div>
-    	<h2>Error Message</h2>
-    	<div id="errMsg"></div>
-	    <script>
-		    var studRespDiv=document.getElementById("studResp");
-		    var errMsgDiv=document.getElementById("errMsg");
-		    studRespDiv.innerHTML=studResp;
-		    errMsgDiv.innerHTML=errMsg;
-	    </script>
-    </body>
+		</script><style>
+			body{
+				margin:0px;
+			 	height:100%;
+				width:100%;
+				display:table;
+				position:absolute;
+			}
+			#wallpaper{
+				background-image:url('https://1.bp.blogspot.com/-EFBh8zEwOqU/WLEiev7D52I/AAAAAAAAKww/0CAmoLWvSMAy2Wlfl-b4bXGWXy5blleYQCLcB/s1600/dscf3294.jpg');
+				background-position: 0 0;
+				background-repeat:no-repeat;
+				background-size:cover;
+				position: absolute;
+				left:0;right:0;bottom:0px;top:0;
+				text-align:center;
+				z-index: -1;
+			}
+			#middle{
+				text-align:center;display: table-cell;vertical-align: middle;
+			}
+			#header-band{
+				background-color: rgba(255,255,255,0.95);
+				padding:15px;
+			}
+			#youvote{
+				font-size:160px;
+				font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif; 
+				font-weight:bold;
+				padding:0px;
+				/* prevents text selection */
+				-webkit-user-select: none;  /* Chrome all / Safari all */
+				-moz-user-select: none;	 /* Firefox all */
+				-ms-user-select: none;	  /* IE 10+ */
+				user-select: none;		  /* Likely future */  
+				cursor:default;
+			}
+			#you{
+				color:#ff0000;
+			}
+			#vote{
+				color:rgb(0,176,240);
+			}
+			#lesson{
+				width:760px;
+				margin:0 auto;
+				padding-bottom:20px;
+			}
+			#errMsg{
+			}
+		</style>
+	</head>
+	<body>
+		<div id="middle">
+			<div id="header-band">
+				<header id="youvote">
+					<span id="you">You</span><span id="vote">Vote</span>
+				</header>
+				<div id="lesson" >
+					<div id="errMsg"></div>
+					<h2>Download Answers</h2>
+					<div id="studResp"></div>
+				</div>
+			</div>
+		</div>
+		<div id="wallpaper" ></div>
+		<script>
+			var studRespDiv=document.getElementById("studResp");
+			var errMsgDiv=document.getElementById("errMsg");
+			studRespDiv.innerHTML=studResp;
+			errMsgDiv.innerHTML=errMsg;
+		</script>
+	</body>
 </html>
