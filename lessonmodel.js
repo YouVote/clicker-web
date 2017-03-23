@@ -1,4 +1,4 @@
-define([],function(){
+define(["ctype"],function(ctype){
 	return function lessonModelEngine(qnStemDiv,lessonPlan){
 		var qnNo=-1;
 		var qnObj={};
@@ -21,7 +21,8 @@ define([],function(){
 			if(qId>=0 && qId<lessonPlan.length){
 				qnNo=qId;
 				execQn();
-			}else{// any other qId value leads to end.
+			}else{
+				// any other qId value leads to end.
 				// todo: refactor end() into its own function. 
 				sessionStorage.setItem('studRespData', JSON.stringify(studRespData));
 				sessionStorage.setItem('endErrMsg', "lesson ended");
@@ -30,12 +31,11 @@ define([],function(){
 		}
 		function execQn(){
 			var qnSpec=lessonPlan[qnNo];
-			// change protocol template
-			currJsFile=qnSpec.modName;// modName
-			currParams=qnSpec.modParams;// modParams
-			currStem=qnSpec.qnStem;// qnStem
-			qnStemDiv.innerHTML="<div class='ui-content'>"+currStem+"</div>";
-			MathJax.Hub.Typeset(qnStemDiv)
+			currJsFile=qnSpec.modName;
+			currParams=qnSpec.modParams;
+			currStem=qnSpec.qnStem;
+			var stemContent=new ctype(currStem);
+			stemContent.putInto(qnStemDiv);
 			qnHandler.execQn(currJsFile,currParams,studRespData[qnNo]);
 			lessonCtrlObj.update(qnNo,lessonPlan,studRespData);
 		}

@@ -8,7 +8,6 @@ require.config({
 });
 
 require(['jquery','jquery-mobile'],function(){
-	//$('head').append('<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.css">');
-	parent.passOptsJquery($);
+	passOpt$($)
 });
 

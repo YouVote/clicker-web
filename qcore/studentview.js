@@ -1,4 +1,7 @@
 define([],function(){
+	require(['jquery'],function(){
+		$('head').append('<link rel="stylesheet" type="text/css" href="'+config.webCoreBaseAddr+'studentview.css">');
+	})
 	return function studentViewEngine(studentListDiv){
 		var studentIcons={};
 		// called by studentModel

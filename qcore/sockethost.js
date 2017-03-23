@@ -23,7 +23,8 @@ define(["socketio-server"],function(io){
 		});
 
 		socketCore.on('playerJoin',function(socketId){
-			socketCore.emit('relay',{'socketId':socketId,'msg':{'title':'studentParams?'}});
+			socketCore.emit('relay',{'socketId':socketId,
+				'msg':{'title':'studentParams?','baseUrl':config.baseProdUrl}});
 		});
 		socketCore.on('playerQuit',function(socketId){
 			studentLeave(socketId);

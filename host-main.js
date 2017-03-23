@@ -2,90 +2,29 @@ require.config({ urlArgs: "v=" +  (new Date()).getTime() });
 
 require.config({
 	packages:[
-		{"name":"webcore","location":"core"},
+		{"name":"webcore","location":config.webCoreBaseAddr},
+		{"name":"ctype","location":config.baseProdUrl+"ctype/"},
 	],
 	paths:{
 		"jquery":"https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min",
 		"bootstrap":"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min",
 		"socketio-server":"https://avalon-gabrielwu84.rhcloud.com/socket.io/socket.io",
-		
-		"mathjax": "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax",
 		"d3js":"https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.0/d3.min",
-		
 		"interface":"interface",
 		"lessonctrl":"lessonctrl",
-		"lessonmodel":"lessonmodel",
-		"config":"config"
+		"lessonmodel":"lessonmodel"
 	},
-	shim:{
-		"mathjax":{
-			exports:"MathJax",
-			init:function(){
-				MathJax.Hub.Config({
-					HTML: ["input/TeX","output/HTML-CSS"],
-					TeX: { extensions: ["AMSmath.js","AMSsymbols.js"],
-						equationNumbers: { autoNumber: "AMS" } },
-					extensions: ["tex2jax.js"],
-					jax: ["input/TeX","output/HTML-CSS"],
-					tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-						displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-						processEscapes: true },
-					"HTML-CSS": { availableFonts: ["TeX"],
-						linebreaks: { automatic: true } }
-				});
-			}
-		},
-	}
 });
 var $;
-var opt$;
-function passOptsJquery(_$){
-	opt$=_$;
-}
-var optFrameResize=function(){
-	var obj=document.getElementById("qnOpts");
-	var iframeOptDiv=obj.contentWindow.document.getElementById("opt");
-	iframeOptDiv.style.height=iframeOptDiv.firstChild.offsetHeight+"px";
-	obj.style.height = iframeOptDiv.firstChild.offsetHeight+"px";
-}
-
-// creating and instantiating object from anonymous class
-var paginator=new (function(){
-	var domArr={}
-	this.addDom=function(domName){
-		domArr[domName]={
-			dom:document.getElementById(domName),
-			orig:document.getElementById(domName).style.display
-		};
-	}
-	this.setDom=function(setDomName){
-		for(var domName in domArr){
-			if(domName==setDomName){
-				domArr[domName]["dom"].style.display=domArr[domName]["orig"];
-			} else {
-				domArr[domName]["dom"].style.display="none";
-			}
-		}
-	}
-})()
 
 require(['jquery'],function(){
+	require(['bootstrap'])
 	$('head').append('<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">');
 	$('head').append('<link rel="stylesheet" type="text/css" href="host.css">');
-	$('head').append('<link rel="stylesheet" type="text/css" href="studentview.css">');
-	$(document).ready(function(){
-		paginator.addDom("page-connecting")
-		paginator.addDom("page-lesson")		
-		paginator.addDom("page-confirm")
-		paginator.setDom("page-connecting");
-	});
-	require(['bootstrap'])
-	require(['mathjax'])
-	//document.getElementById("qnOpts").contentWindow.testFunction();
 })
 
-require(["webcore","interface","lessonctrl","lessonmodel","config"],
-function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine,config){
+require(["webcore","interface","lessonctrl","lessonmodel"],
+function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine){
 	var lessonPlan=sessionStorage.getItem('lessonPlan');
 	lessonPlan=JSON.parse(lessonPlan);
 	var socketURL=config.socketURL;
@@ -121,8 +60,7 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine,config){
 		studentModelObj.getStudents
 		);
 	qnHandler.passDivs(
-		//document.getElementById("testQnOpts"),
-		document.getElementById("qnOpts").contentWindow.document.getElementById("opt"),
+		document.getElementById("qnOpts"),
 		document.getElementById("qnResp")
 		);
 	lessonObj=new lessonModelEngine(
