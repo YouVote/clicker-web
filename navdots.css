@@ -2,6 +2,10 @@
 	padding-left:0px;
 	font-size:0px;
 	margin-left:-20px;
+	margin-bottom:-10px;
+	padding-top:10px;
+	padding-left:9px;
+	padding-right:9px;
 	background-color: white;
 }
 #nav-dots > li {
@@ -19,7 +23,7 @@
 	cursor: pointer; cursor: hand; 
 	width:20px;
 	height:20px;
-	border:solid #ccc 8px;
+	border:solid #ccc 10px;
 }
 #nav-dots > li.active {
 	background-color:rgb(0,245,0);

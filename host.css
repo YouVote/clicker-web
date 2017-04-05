@@ -32,8 +32,8 @@ body{
 	margin-left:250px; width:auto; height:100%; overflow:hidden;
 }
 #nav-btns{
-	width:248px;padding:15px 10px 15px 10px;background-color:white;
+	width:248px;padding:10px 9px 15px 9px;background-color:white;
 }
 #nav-btns > button{
-	width:76px;
+	width:77px;
 }
