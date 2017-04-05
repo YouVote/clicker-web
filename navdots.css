@@ -1,0 +1,45 @@
+#nav-dots{
+	padding-left:0px;
+	font-size:0px;
+	margin-left:-20px;
+}
+#nav-dots > li {
+	display:inline-block;
+	background-color:rgb(0,180,245);
+	border-radius: 50%;
+	width:20px;
+	height:20px;
+	text-align:center;
+	vertical-align: middle;
+	margin-left:20px;
+	margin-bottom:10px;
+}
+#nav-dots > li.active {
+	background-color:rgb(0,245,0);
+}
+#nav-dots > li.end {
+	background-color:red;
+}
+#nav-dots > li.add {
+	background-color:#eee;
+	border:dashed black 1px;
+	width:18px;
+	height:18px;
+	font-size:20px;
+	content:"+";
+}
+#nav-dots > li.add:hover{
+	background-color:#ddd;
+	font-size:20px;
+	content:"+";
+}
+#nav-dots > li.add:hover::after{
+	position:relative;
+	top:-2px;
+	font-size:20px;
+	font-weight:bold;
+	content:"+";
+}
+#nav-dots > li.done {
+	background-color:rgb(0,100,175);
+}

@@ -21,6 +21,7 @@ require(['jquery'],function(){
 	require(['bootstrap'])
 	$('head').append('<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">');
 	$('head').append('<link rel="stylesheet" type="text/css" href="host.css">');
+	$('head').append('<link rel="stylesheet" type="text/css" href="navdots.css">');
 })
 
 require(["webcore","interface","lessonctrl","lessonmodel"],
@@ -32,6 +33,7 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine){
 		paginator,
 		document.getElementById("lesson-id")
 		);
+
 	lessonCtrlObj=new lessonCtrlEngine(
 		document.getElementById("prevBtn"),
 		document.getElementById("resetBtn"),
@@ -67,5 +69,23 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine){
 		document.getElementById("qnStem"),
 		lessonPlan
 		);
+
+	// get no of qns,
+	// put a li for each qn, and attach run qnId to each
+	// attach curr qn. 
 	lessonObj.playQnById(0);
+	var navDotDiv=document.getElementById("nav-dots");
+
+	for(var i=0;i<=lessonPlan.length;i++){
+		var dot=document.createElement("li")
+		$(dot).data('play-qid',i);
+		dot.onclick=function(){lessonObj.playQnById($(this).data('play-qid'));};
+		if(i==lessonObj.currQnNo()){
+			$(dot).removeClass().addClass("active");
+		} else if(i==lessonPlan.length){
+			$(dot).removeClass().addClass("end");
+		}
+		navDotDiv.append(dot)
+	}
+	
 })

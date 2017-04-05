@@ -7,7 +7,7 @@ define(["ctype"],function(ctype){
 		var currJsFile;
 		var currParams;
 		var currStem;
-
+		
 		for(var qn in lessonPlan){// setup studRespData
 			studRespData.push({});
 		}
@@ -38,6 +38,9 @@ define(["ctype"],function(ctype){
 			stemContent.putInto(qnStemDiv);
 			qnHandler.execQn(currJsFile,currParams,studRespData[qnNo]);
 			lessonCtrlObj.update(qnNo,lessonPlan,studRespData);
+		}
+		this.currQnNo=function(){
+			return qnNo;
 		}
 	}
 })
