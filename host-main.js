@@ -34,6 +34,30 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine){
 		document.getElementById("lesson-id")
 		);
 
+	// integrate navdots with lessonCtrl
+	navDotObj=new (function navDot(navDotDiv){
+		var navDotArr=[]
+		for(var i=0;i<lessonPlan.length;i++){
+			var dot=document.createElement("li")
+			navDotArr.push(dot);
+			$(dot).data('play-qid',i);
+			dot.onclick=function(){lessonObj.playQnById($(this).data('play-qid'));};
+			navDotDiv.append(dot)
+		}
+		var dot=document.createElement("li")
+		$(dot).data('play-qid',-1);
+		dot.onclick=function(){lessonObj.playQnById($(this).data('play-qid'));};
+		$(dot).addClass("end");
+		navDotDiv.append(dot);
+
+		this.setDone=function(id){
+			$(navDotArr[id]).removeClass().addClass("done");
+		}
+		this.setActive=function(id){
+			$(navDotArr[id]).removeClass().addClass("active");	
+		}
+	})(document.getElementById("nav-dots"))
+
 	lessonCtrlObj=new lessonCtrlEngine(
 		document.getElementById("prevBtn"),
 		document.getElementById("resetBtn"),
@@ -70,22 +94,7 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine){
 		lessonPlan
 		);
 
-	// get no of qns,
-	// put a li for each qn, and attach run qnId to each
-	// attach curr qn. 
 	lessonObj.playQnById(0);
-	var navDotDiv=document.getElementById("nav-dots");
 
-	for(var i=0;i<=lessonPlan.length;i++){
-		var dot=document.createElement("li")
-		$(dot).data('play-qid',i);
-		dot.onclick=function(){lessonObj.playQnById($(this).data('play-qid'));};
-		if(i==lessonObj.currQnNo()){
-			$(dot).removeClass().addClass("active");
-		} else if(i==lessonPlan.length){
-			$(dot).removeClass().addClass("end");
-		}
-		navDotDiv.append(dot)
-	}
-	
+
 })

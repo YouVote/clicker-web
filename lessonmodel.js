@@ -18,6 +18,8 @@ define(["ctype"],function(ctype){
 		}
 		this.playQnById=function(qId){
 			studRespData[qnNo]=qnHandler.getStudResp(); // save previous studRespData
+			navDotObj.setDone(qnNo);
+			navDotObj.setActive(qId);
 			if(qId>=0 && qId<lessonPlan.length){
 				qnNo=qId;
 				execQn();
