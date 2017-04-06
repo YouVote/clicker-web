@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
 		<title>YouVote Lesson</title>
 		<!-- load config here -->
 		<script src="config.js"></script>
@@ -26,8 +28,12 @@
 			})()
 		</script>
 		<style>
+			html, body{
+				height:100%;
+				margin:0px;
+			}
 			.page{
-				margin:0px;	height:100%;width:100%;	display:table;position:absolute;
+				margin:0px;	height:100%;width:100%;	display:block;position:absolute;
 			}
 			#connecting-wallpaper{
 				background-position: 0 0;background-repeat:no-repeat;background-size:cover;
@@ -35,11 +41,14 @@
 				z-index: -1;
 			}
 			#connecting-middle{
-				text-align:center;display: table-cell;vertical-align: middle;
+				text-align:center;display: table;
+				width:100%;height:100%;
 			}
 			#connecting-header-band{
+				display: table-cell;
+				text-align: center;
+				vertical-align: middle;
 				background-color: rgba(255,255,255,0.95);
-				padding:15px;
 			}
 			#connecting-status{
 				width:760px;

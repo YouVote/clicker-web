@@ -36,6 +36,13 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine){
 
 	// integrate navdots with lessonCtrl
 	navDotObj=new (function navDot(navDotDiv){
+		var stylesheet=$('link[href="navdots.css"]')[0].sheet;
+		var navDivWidth=230;
+		var navDotWidth=20;
+		var nDots=lessonPlan.length+1;
+		var dotSpace=Math.floor((navDivWidth-nDots*navDotWidth)/(nDots-1))
+		stylesheet.insertRule("#nav-dots {margin-left:-"+dotSpace+"px;}",9)
+		stylesheet.insertRule("#nav-dots > li{margin-left:"+dotSpace+"px;}",9)
 		var navDotArr=[]
 		for(var i=0;i<lessonPlan.length;i++){
 			var dot=document.createElement("li")
