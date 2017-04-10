@@ -102,6 +102,4 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine){
 		);
 
 	lessonObj.playQnById(0);
-
-
 })
