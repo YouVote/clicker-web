@@ -49,13 +49,13 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine){
 			navDotArr.push(dot);
 			$(dot).data('play-qid',i);
 			dot.onclick=function(){lessonObj.playQnById($(this).data('play-qid'));};
-			navDotDiv.append(dot)
+			navDotDiv.appendChild(dot)
 		}
 		var dot=document.createElement("li")
 		$(dot).data('play-qid',-1);
 		dot.onclick=function(){lessonObj.playQnById($(this).data('play-qid'));};
 		$(dot).addClass("end");
-		navDotDiv.append(dot);
+		navDotDiv.appendChild(dot);
 
 		this.setDone=function(id){
 			$(navDotArr[id]).removeClass().addClass("done");
