@@ -13,15 +13,17 @@
 				this.addDom=function(domName){
 					domArr[domName]={
 						dom:document.getElementById(domName),
-						orig:document.getElementById(domName).style.display
+						// orig:document.getElementById(domName).style.display
 					};
 				}
 				this.setDom=function(setDomName){
 					for(var domName in domArr){
 						if(domName==setDomName){
-							domArr[domName]["dom"].style.display=domArr[domName]["orig"];
+							// domArr[domName]["dom"].style.display=domArr[domName]["orig"];
+							domArr[domName]["dom"].style.visibility="visible";
 						} else {
-							domArr[domName]["dom"].style.display="none";
+							//domArr[domName]["dom"].style.display="none";
+							domArr[domName]["dom"].style.visibility="hidden";
 						}
 					}
 				}
