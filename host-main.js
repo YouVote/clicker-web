@@ -2,7 +2,7 @@ require.config({ urlArgs: "v=" +  (new Date()).getTime() });
 
 require.config({
 	packages:[
-		{"name":"webcore","location":config.webCoreBaseAddr},
+		{"name":"webKernel","location":"yvWebKernel"},
 		{"name":"ctype","location":config.baseProdUrl+"ctype/"},
 	],
 	paths:{
@@ -10,8 +10,9 @@ require.config({
 		"bootstrap":"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min",
 		"socketio-server":"https://avalon-gabrielwu84.rhcloud.com/socket.io/socket.io",
 		"d3js":"https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.0/d3.min",
-		"interface":"interface",
+		// "interface":"interface",
 		"lessonctrl":"lessonctrl",
+		"studentview":"studentview",
 		"lessonmodel":"lessonmodel"
 	},
 });
@@ -24,15 +25,11 @@ require(['jquery'],function(){
 	$('head').append('<link rel="stylesheet" type="text/css" href="navdots.css">');
 })
 
-require(["webcore","interface","lessonctrl","lessonmodel"],
-function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine){
+require(["webKernel","lessonctrl","studentview","lessonmodel"],
+function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	var lessonPlan=sessionStorage.getItem('lessonPlan');
 	lessonPlan=JSON.parse(lessonPlan);
 	var socketURL=config.socketURL;
-	interface=new interfaceHandler(
-		paginator,
-		document.getElementById("lesson-id")
-		);
 
 	// integrate navdots with lessonCtrl
 	navDotObj=new (function navDot(navDotDiv){
@@ -69,37 +66,45 @@ function(webCore,interfaceHandler,lessonCtrlEngine,lessonModelEngine){
 		document.getElementById("prevBtn"),
 		document.getElementById("resetBtn"),
 		document.getElementById("nextBtn")
-		);
-	var webCoreObj=new webCore();
-	studentViewObj=new webCoreObj.studentViewEngine(
+	);
+
+	studentViewObj=new studentViewEngine(
 		document.getElementById("student-box")
-		);
-	studentModelObj=new webCoreObj.studentModelEngine(
-		studentViewObj.addStudent,
-		studentViewObj.markConnected,
-		studentViewObj.markDisconnected
-		);
-	socket=new webCoreObj.socketHostEngine(
-		socketURL,
-		interface.socketError,
-		interface.socketConnected,
-		interface.studentEnter,
-		interface.studentLeave,
-		interface.studentResp
-		);	
-	qnHandler=new webCoreObj.questionHandler(
-		studentViewObj.resetAnswered,
-		studentViewObj.markAnswered,
-		studentModelObj.getStudents
-		);
-	qnHandler.passDivs(
+	);
+
+	youVote=new webKernel(
+		document.getElementById("qnStem"),
 		document.getElementById("qnOpts"),
 		document.getElementById("qnResp")
-		);
-	lessonObj=new lessonModelEngine(
-		document.getElementById("qnStem"),
-		lessonPlan
-		);
+	);
+	youVote.setKernelParam(
+		"connectPass",
+		function(lessonId){
+			lessonIdDom=document.getElementById("lesson-id");
+			lessonIdDom.innerHTML=lessonId;
+			paginator.setDom("page-lesson");
 
+		}
+	);
+	youVote.setKernelParam(
+		"connectFail",
+		function(errMsg){
+			// try to unify with end clicked in hostlesson 
+			if(typeof(studResp)=='undefined'){studResp=null;}
+			sessionStorage.setItem('studResp', JSON.stringify(studResp));
+			sessionStorage.setItem('endErrMsg', errMsg);
+			window.location="end.html";
+		}
+	);
+	youVote.setKernelParam("yvWebKernelBaseAddr","yvWebKernel/");
+	youVote.setKernelParam("viewAddStudent",studentViewObj.addStudent);
+	youVote.setKernelParam("viewMarkReconnected",studentViewObj.markReconnected);
+	youVote.setKernelParam("viewMarkDisconnected",studentViewObj.markDisconnected);
+	youVote.setKernelParam("viewMarkAnswered",studentViewObj.markAnswered);
+	youVote.setKernelParam("viewRestorePrevAnswered",studentViewObj.resetAnswered);
+
+	// lessonEngine still accesses youVote from global namespace.
+	// todo: iron this out.
+	lessonObj=new lessonModelEngine(lessonPlan);
 	lessonObj.playQnById(0);
 })

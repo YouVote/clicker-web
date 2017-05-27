@@ -1,5 +1,5 @@
 define(["ctype"],function(ctype){
-	return function lessonModelEngine(qnStemDiv,lessonPlan){
+	return function lessonModelEngine(lessonPlan){
 		var qnNo=-1;
 		var qnObj={};
 		var studRespData=[];
@@ -17,7 +17,9 @@ define(["ctype"],function(ctype){
 			execQn();
 		}
 		this.playQnById=function(qId){
-			studRespData[qnNo]=qnHandler.getStudResp(); // save previous studRespData
+			if(qnNo>=0){ // not first question, save previous studRespData
+				studRespData[qnNo]=youVote.getQnResp(); 
+			}
 			navDotObj.setDone(qnNo);
 			navDotObj.setActive(qId);
 			if(qId>=0 && qId<lessonPlan.length){
@@ -36,9 +38,9 @@ define(["ctype"],function(ctype){
 			currJsFile=qnSpec.modName;
 			currParams=qnSpec.modParams;
 			currStem=qnSpec.qnStem;
-			var stemContent=new ctype(currStem);
-			stemContent.putInto(qnStemDiv);
-			qnHandler.execQn(currJsFile,currParams,studRespData[qnNo]);
+			// var stemContent=new ctype(currStem);
+			// stemContent.putInto(qnStemDiv);
+			youVote.execQn(currStem,currJsFile,currParams,studRespData[qnNo]);
 			lessonCtrlObj.update(qnNo,lessonPlan,studRespData);
 		}
 		this.currQnNo=function(){

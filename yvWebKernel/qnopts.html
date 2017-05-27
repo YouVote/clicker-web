@@ -15,6 +15,9 @@
 			}
 		</style>
 		<script>
+		// rename file optframe.html
+		// implent async system to load jquery+mobile, and put all these in without using iframe src,
+		// this is to bypass cross site scripting when not using webserver. 
 			var passOpt$;
 			function passOptFunc(func){
 				passOpt$=func;
