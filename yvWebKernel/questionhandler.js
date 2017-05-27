@@ -1,10 +1,5 @@
-define(["./modulerouter"],function(modulerouter){
-	var modBaseAddr=config.modBaseAddr;
-	return function questionhandler(
-			studentViewClearAnswered,
-			studentViewMarkAnswered,
-			getConnectedStudents
-		){
+define(["./modulerouter","jquery"],function(modulerouter){
+	return function questionhandler(qnOptsDiv,qnRespDiv,kernelParams,interactManager){
 		// a very tightly intertwined module,
 		// interfacing with many components.
 		// 1. with the calling controller
@@ -23,22 +18,19 @@ define(["./modulerouter"],function(modulerouter){
 		var execQnWaiting=false;
 		var opt$=null;
 
-		this.passDivs=function(optsDiv,respDiv){
-			qnRespDiv=respDiv;
-			qnOptsDiv=optsDiv;
+		var modBaseAddr=kernelParams.yvProdBaseAddr+"mods/";
 
-			optFrame=document.createElement("iframe");
-			optFrame.style.border="none";
-			optFrame.style.width="100%";
-			optFrame.style.overflow="hidden";
-			optFrame.src=config.webCoreBaseAddr+"qnopts.html"
-			
-			$(optFrame).load(function(){
-				qnOptsDiv=optFrame.contentWindow.document.getElementById("opt")
-				optFrame.contentWindow.passOptFunc(passOptsJquery);
-			})
-			$(optsDiv).html(optFrame);
-		}
+		optFrame=document.createElement("iframe");
+		optFrame.style.border="none";
+		optFrame.style.width="100%";
+		optFrame.style.overflow="hidden";
+		optFrame.src=kernelParams.yvWebKernelBaseAddr+"qnopts.html"
+		
+		$(optFrame).load(function(){
+			qnOptsDiv=optFrame.contentWindow.document.getElementById("opt")
+			optFrame.contentWindow.passOptFunc(passOptsJquery);
+		})
+		$(qnOptsDiv).html(optFrame);
 
 		optFrameResize=function(fitDom){
 			var obj=optFrame;
@@ -54,11 +46,10 @@ define(["./modulerouter"],function(modulerouter){
 			})
 			var obsConfig={attributes:true,childList:true,subtree:true,characterData:true};
 			obs.observe(fitDom, obsConfig);
-
 		}
 
 		function pushQuestion(studentUuid){
-			var studentList=getConnectedStudents();
+			var studentList=interactManager.getConnectedStudents();
 			studentList[studentUuid].relay({
 				"title":"execModule",
 				"modName":currModName,
@@ -73,7 +64,7 @@ define(["./modulerouter"],function(modulerouter){
 			var questionReadyCallback=function(){
 				$(qnOptsDiv).html(qnCore.responseInput(opt$,optFrameResize));
 				$(qnRespDiv).html(qnCore.responseDom());
-				var studentList=getConnectedStudents();
+				var studentList=interactManager.getConnectedStudents();
 				for (var studentUuid in studentList){
 					pushQuestion(studentUuid)
 				}
@@ -83,9 +74,9 @@ define(["./modulerouter"],function(modulerouter){
 			}
 			// wait until opt$ is a function
 			if(opt$!=null){
-				modulePath=config.baseProdUrl+"mods/"+currModName+".js";
+				modulePath=kernelParams.yvProdBaseAddr+"mods/"+currModName+".js";
 				qnCore=new modulerouter(modulePath,currParams,questionReadyCallback);
-				studentViewClearAnswered(currStudResp);
+				interactManager.restorePrevAnswered(currStudResp);
 			}else{
 				execQnWaiting=true;
 			}
@@ -94,7 +85,7 @@ define(["./modulerouter"],function(modulerouter){
 			if(!(studentUuid in currStudResp)){ // check that student has not answered
 				currStudResp[studentUuid]=studentAns; 
 				qnCore.processResponse(studentUuid,studentAns);
-				studentViewMarkAnswered(studentUuid);
+				interactManager.markAnswered(studentUuid);
 			} else {
 				console.log(studentUuid+" has already answered");
 			}
