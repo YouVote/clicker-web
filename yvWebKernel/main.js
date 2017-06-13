@@ -26,6 +26,7 @@ require.config({ urlArgs: "v=" +  (new Date()).getTime() });
 define(["./sockethost","./studentmodel","./questionhandler"],
 function(socketHostEngine,studentModelEngine,qnHandlerEngine){
 	return function(stemDiv,optDiv,respDiv){
+		// todo: use document.querySelector() on divs if type is string. 
 		var socketHostObj, studentModelObj, qnHandlerObj, kernelObj=this;
 		var connectCalled=false, socketReady=false, kivQn={};
 
@@ -41,8 +42,8 @@ function(socketHostEngine,studentModelEngine,qnHandlerEngine){
 			//yvWebKernelBaseAddr:"yvWebKernel/",
 			yvProdBaseAddr:"https://youvote.github.io/clicker-prod/",
 			// used in interactManager
-			connectPass:function(lessonId){}, 
-			connectFail:function(errMsg){},
+			onConnectPass:function(lessonId){}, 
+			onConnectFail:function(errMsg){},
 			viewAddStudent:function(studentUuid){},
 			viewMarkReconnected:function(studentUuid){},
 			viewMarkDisconnected:function(studentUuid){},
@@ -58,16 +59,16 @@ function(socketHostEngine,studentModelEngine,qnHandlerEngine){
 					kivQn["qnStem"],kivQn["widgetName"],
 					kivQn["widgetParams"],kivQn["currResp"]
 				);
-				kernelParams.connectPass(lessonId);
+				kernelParams.onConnectPass(lessonId);
 				kivQn={};
 			},
 			socketFailCallback:function(errMsg){
 				console.log(errMsg);
-				kernelParams.connectFail(errMsg);
+				kernelParams.onConnectFail(errMsg);
 			},
 			studentEnter:function(socketId,data){
 				var student=studentModelObj.studentEnter(socketId,data.studentName,data.uuid);
-				qnHandler.initConnectedStudent(data.uuid);
+				qnHandlerObj.initConnectedStudent(data.uuid);
 			},
 			studentLeave:function(socketId){
 				var studentUuid=studentModelObj.socIdToUuid(socketId);
@@ -75,7 +76,7 @@ function(socketHostEngine,studentModelEngine,qnHandlerEngine){
 			},
 			studentResp:function(socketId,data){
 				var studentUuid=studentModelObj.socIdToUuid(socketId);
-				qnHandler.procAns(studentUuid,data.data);
+				qnHandlerObj.procAns(studentUuid,data.data);
 			},
 
 			// called in studentModel

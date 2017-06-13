@@ -78,7 +78,7 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 		document.getElementById("qnResp")
 	);
 	youVote.setKernelParam(
-		"connectPass",
+		"onConnectPass",
 		function(lessonId){
 			lessonIdDom=document.getElementById("lesson-id");
 			lessonIdDom.innerHTML=lessonId;
@@ -87,7 +87,7 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 		}
 	);
 	youVote.setKernelParam(
-		"connectFail",
+		"onConnectFail",
 		function(errMsg){
 			// try to unify with end clicked in hostlesson 
 			if(typeof(studResp)=='undefined'){studResp=null;}
