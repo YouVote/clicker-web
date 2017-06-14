@@ -106,5 +106,7 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	// lessonEngine still accesses youVote from global namespace.
 	// todo: iron this out.
 	lessonObj=new lessonModelEngine(lessonPlan);
+	//lessonObj=new lessonModelEngine(lessonPlan,youVote);
+	//pass qnStemDom, qnOptsDom, qnRespDom in, for settings to act upon. 
 	lessonObj.playQnById(0);
 })
