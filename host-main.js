@@ -78,7 +78,7 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 		document.getElementById("qnResp")
 	);
 	youVote.setKernelParam(
-		"connectPass",
+		"onConnectPass",
 		function(lessonId){
 			lessonIdDom=document.getElementById("lesson-id");
 			lessonIdDom.innerHTML=lessonId;
@@ -87,7 +87,7 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 		}
 	);
 	youVote.setKernelParam(
-		"connectFail",
+		"onConnectFail",
 		function(errMsg){
 			// try to unify with end clicked in hostlesson 
 			if(typeof(studResp)=='undefined'){studResp=null;}
@@ -106,7 +106,5 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	// lessonEngine still accesses youVote from global namespace.
 	// todo: iron this out.
 	lessonObj=new lessonModelEngine(lessonPlan);
-	//lessonObj=new lessonModelEngine(lessonPlan,youVote);
-	//pass qnStemDom, qnOptsDom, qnRespDom in, for settings to act upon. 
 	lessonObj.playQnById(0);
 })
