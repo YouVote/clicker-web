@@ -10,7 +10,6 @@ require.config({
 		"bootstrap":"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min",
 		"socketio-server":"https://avalon-gabrielwu84.rhcloud.com/socket.io/socket.io",
 		"d3js":"https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.0/d3.min",
-		// "interface":"interface",
 		"lessonctrl":"lessonctrl",
 		"studentview":"studentview",
 		"lessonmodel":"lessonmodel"
@@ -33,13 +32,21 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 
 	// integrate navdots with lessonCtrl
 	navDotObj=new (function navDot(navDotDiv){
-		var stylesheet=$('link[href="navdots.css"]')[0].sheet;
+		// possibly write this up in vue.
+		// some problem with loading? randomly fails.
+		// var stylesheet=$('link[href="navdots.css"]')[0].sheet;
+		// var stylesheet=$('link[href="navdots.css"]')
+		// console.log(stylesheet)
+		// stylesheet=stylesheet[0];
+		// console.log(stylesheet)
+		// stylesheet=stylesheet.sheet;
+		// console.log(stylesheet)
 		var navDivWidth=230;
 		var navDotWidth=20;
 		var nDots=lessonPlan.length+1;
 		var dotSpace=Math.floor((navDivWidth-nDots*navDotWidth)/(nDots-1))
-		stylesheet.insertRule("#nav-dots {margin-left:-"+dotSpace+"px;}",9)
-		stylesheet.insertRule("#nav-dots > li{margin-left:"+dotSpace+"px;}",9)
+		// stylesheet.insertRule("#nav-dots {margin-left:-"+dotSpace+"px;}",9)
+		// stylesheet.insertRule("#nav-dots > li{margin-left:"+dotSpace+"px;}",9)
 		var navDotArr=[]
 		for(var i=0;i<lessonPlan.length;i++){
 			var dot=document.createElement("li")
@@ -72,11 +79,11 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 		document.getElementById("student-box")
 	);
 
-	youVote=new webKernel(
-		document.getElementById("qnStem"),
-		document.getElementById("qnOpts"),
-		document.getElementById("qnResp")
-	);
+	var qnStemDom=document.getElementById("qnStem");
+	var qnOptsDom=document.getElementById("qnOpts");
+	var qnRespDom=document.getElementById("qnResp");
+	youVote=new webKernel(qnStemDom,qnOptsDom,qnRespDom);
+
 	youVote.setKernelParam(
 		"onConnectPass",
 		function(lessonId){
@@ -102,9 +109,9 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	youVote.setKernelParam("viewMarkDisconnected",studentViewObj.markDisconnected);
 	youVote.setKernelParam("viewMarkAnswered",studentViewObj.markAnswered);
 	youVote.setKernelParam("viewRestorePrevAnswered",studentViewObj.resetAnswered);
-
-	// lessonEngine still accesses youVote from global namespace.
-	// todo: iron this out.
-	lessonObj=new lessonModelEngine(lessonPlan);
+	
+	// add navDotsObj
+	lessonObj=new lessonModelEngine(lessonPlan,youVote);
+	// pass Doms in. 
 	lessonObj.playQnById(0);
 })
