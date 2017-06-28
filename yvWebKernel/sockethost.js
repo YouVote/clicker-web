@@ -1,9 +1,9 @@
 define([],function(){
-	return function(socketURL,interactManager){
+	return function(kernelParams,interactManager){
 		var socketCore;
 		require(["socketio-server"],function(io){
 			try{
-				socketCore=io.connect(socketURL);
+				socketCore=io.connect(kernelParams.socketServerURL);
 			} catch(err){
 				interactManager.socketFailCallback("Could not connect to socketio server: "+err)
 			}
@@ -17,7 +17,7 @@ define([],function(){
 
 			socketCore.on('playerJoin',function(socketId){
 				socketCore.emit('relay',{'socketId':socketId,
-					'msg':{'title':'studentParams?','baseUrl':config.baseProdUrl}});
+					'msg':{'title':'studentParams?','baseUrl':kernelParams.yvProdBaseAddr}});
 			});
 			socketCore.on('playerQuit',function(socketId){
 				interactManager.studentLeave(socketId);

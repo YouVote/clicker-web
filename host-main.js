@@ -109,7 +109,7 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	youVote.setKernelParam("viewMarkDisconnected",studentViewObj.markDisconnected);
 	youVote.setKernelParam("viewMarkAnswered",studentViewObj.markAnswered);
 	youVote.setKernelParam("viewRestorePrevAnswered",studentViewObj.resetAnswered);
-	
+	// youVote.setKernelParam("yvProdBaseAddr","http://localhost/clicker-prod/");
 	// add navDotsObj
 	lessonObj=new lessonModelEngine(lessonPlan,youVote);
 	// pass Doms in. 
