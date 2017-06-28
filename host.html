@@ -94,7 +94,7 @@
 			<div id="connecting-wallpaper" ></div>
 		</div>
 		<div class="page" id="page-lesson">
-			<section id="lesson-header" >
+			<section id="lesson-side" >
 				<div class="youvote youvote-line">
 					<span class="you">You</span><span class="vote">Vote</span><span class="you">You</span><span class="vote">Vote</span><span class="you">You</span><span class="vote">Vote</span><span class="you">You</span><span class="vote">Vote</span><span class="you">You</span><span class="vote">Vote</span><span class="you">You</span><span class="vote">Vote</span><span class="you">You</span><span class="vote">Vote</span><span class="you">You</span><span class="vote">Vote</span><span class="you">You</span><span class="vote">Vote</span>
 				</div>
@@ -117,23 +117,21 @@
 				<div id='student-box' style="background-color:#dddddd;padding:2px 2px;">
 				</div>
 			</section>
-			<section id="lesson-content">
-				<div style="display:table; table-layout:fixed; width:100%; height:100%;">
+			<section id="lesson-main">
+			<!-- start abstracting this -->
+				
+				<div style="display:table; table-layout:fixed; width:100%; padding:40px;">
 					<div style="display:table-column-group; ">
-						<div style="display:table-column; width:290px;"></div>
 						<div style="display:table-column; width:100%;"></div>
+						<div style="display:table-column; width:290px;"></div>
 					</div>
 					<div style="display:table-row;">
-						<div style="display:table-cell; vertical-align:top;padding:20px;">
-							<div id='qnStem' style="line-height:150%;"></div>
-							<div id='qnOpts'></div> 
-							<!--
-							<iframe id='qnOpts' src="qnopts.html" style="border:none;width:100%;overflow:hidden;"
-							></iframe>-->
-						</div>
-						<div id='qnResp' style="display:table-cell;padding:20px;"></div>
+						<div id='qnStem' style="display:table-cell;line-height:150%; margin:40px;font-size:40px;"></div>
+						<div id='qnOpts' style="display:table-cell; vertical-align:top;margin:20px;"></div> 
 					</div>
 				</div>
+				<div id='qnResp' style="display:table-cell;padding-left:20px;"></div>
+			<!-- end abstracting this -->
 			</section>
 		</div>
 		<div id="page-confirm">Confirm End</div>

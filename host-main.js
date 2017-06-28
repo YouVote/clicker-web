@@ -79,9 +79,18 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 		document.getElementById("student-box")
 	);
 
+
+
+	var lessonMainDom=document.getElementById("lesson-main");
+	// store original content somewhere. 
+	// use template. 
 	var qnStemDom=document.getElementById("qnStem");
 	var qnOptsDom=document.getElementById("qnOpts");
 	var qnRespDom=document.getElementById("qnResp");
+
+
+
+
 	youVote=new webKernel(qnStemDom,qnOptsDom,qnRespDom);
 
 	youVote.setKernelParam(

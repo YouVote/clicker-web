@@ -107,7 +107,7 @@ function(socketHostEngine,studentModelEngine,qnHandlerEngine){
 		};
 
 
-		function connect(){ // called on first execQn. 
+		function connect(){ // called on first execQn. possibly make a public method. 
 			connectCalled=true;
 			studentModelObj=new studentModelEngine(interactManager);
 			qnHandlerObj=new qnHandlerEngine(optDiv,respDiv,kernelParams,interactManager);

@@ -12,7 +12,7 @@ body{
 	font-size:7px;text-align:center;background-color:white;
 }
 
-#lesson-header{
+#lesson-side{
 	height:100%;width:250px;
 	border-right:1px solid #999;
 	border-left:1px solid #999;
@@ -28,12 +28,12 @@ body{
 	vertical-align:middle;
 	background-color:white;
 }
-#lesson-content{
-	margin-left:250px; width:auto; height:100%; overflow:hidden;
-}
 #nav-btns{
 	width:248px;padding:10px 9px 15px 9px;background-color:white;
 }
 #nav-btns > button{
 	width:77px;
+}
+#lesson-main{
+	margin-left:250px; width:auto; height:100%; overflow:hidden;
 }
