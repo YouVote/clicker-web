@@ -113,7 +113,7 @@ function(socketHostEngine,studentModelEngine,qnHandlerEngine){
 			qnHandlerObj=new qnHandlerEngine(optDiv,respDiv,kernelParams,interactManager);
 			require.config({paths:{"socketio-server":kernelParams.socketScriptURL}});
 			socketHostObj=new socketHostEngine(
-				kernelParams.socketServerURL,
+				kernelParams,
 				interactManager
 			);
 		}

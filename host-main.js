@@ -6,7 +6,7 @@ require.config({
 		{"name":"ctype","location":config.baseProdUrl+"ctype/"},
 	],
 	paths:{
-		"jquery":"https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min",
+		"jquery":"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min",
 		"bootstrap":"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min",
 		"socketio-server":"https://avalon-gabrielwu84.rhcloud.com/socket.io/socket.io",
 		"d3js":"https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.0/d3.min",
@@ -118,7 +118,7 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	youVote.setKernelParam("viewMarkDisconnected",studentViewObj.markDisconnected);
 	youVote.setKernelParam("viewMarkAnswered",studentViewObj.markAnswered);
 	youVote.setKernelParam("viewRestorePrevAnswered",studentViewObj.resetAnswered);
-	
+	youVote.setKernelParam("yvProdBaseAddr","http://localhost/clicker-prod/");
 	// add navDotsObj
 	lessonObj=new lessonModelEngine(lessonPlan,youVote);
 	// pass Doms in. 
