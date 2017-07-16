@@ -2,7 +2,7 @@ require.config({ urlArgs: "v=" +  (new Date()).getTime() });
 
 require.config({
 	packages:[
-		{"name":"webKernel","location":"yvWebKernel"},
+		{"name":"webKernel","location":"../yvWebKernel"},
 		{"name":"ctype","location":config.baseProdUrl+"ctype/"},
 	],
 	paths:{
@@ -10,6 +10,7 @@ require.config({
 		"bootstrap":"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min",
 		"socketio-server":"https://avalon-gabrielwu84.rhcloud.com/socket.io/socket.io",
 		"d3js":"https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.0/d3.min",
+		"vue":"https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue",
 		"lessonctrl":"lessonctrl",
 		"studentview":"studentview",
 		"lessonmodel":"lessonmodel"
@@ -79,27 +80,13 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 		document.getElementById("student-box")
 	);
 
-
-
-	var lessonMainDom=document.getElementById("lesson-main");
-	// store original content somewhere. 
-	// use template. 
-	var qnStemDom=document.getElementById("qnStem");
-	var qnOptsDom=document.getElementById("qnOpts");
-	var qnRespDom=document.getElementById("qnResp");
-
-
-
-
-	youVote=new webKernel(qnStemDom,qnOptsDom,qnRespDom);
-
+	youVote=new webKernel("#qnStem","#qnOpts","#qnResp","head");
 	youVote.setKernelParam(
 		"onConnectPass",
 		function(lessonId){
 			lessonIdDom=document.getElementById("lesson-id");
 			lessonIdDom.innerHTML=lessonId;
 			paginator.setDom("page-lesson");
-
 		}
 	);
 	youVote.setKernelParam(
@@ -118,7 +105,7 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	youVote.setKernelParam("viewMarkDisconnected",studentViewObj.markDisconnected);
 	youVote.setKernelParam("viewMarkAnswered",studentViewObj.markAnswered);
 	youVote.setKernelParam("viewRestorePrevAnswered",studentViewObj.resetAnswered);
-	youVote.setKernelParam("yvProdBaseAddr","http://localhost/clicker-prod/");
+	youVote.setKernelParam("yvProdBaseAddr","https://youvote.github.io/clicker-prod/");
 	// add navDotsObj
 	lessonObj=new lessonModelEngine(lessonPlan,youVote);
 	// pass Doms in. 
