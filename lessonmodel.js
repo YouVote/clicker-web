@@ -52,22 +52,29 @@ define([],function(){
 				currQnSpec.modParams,studRespObj.get(qnNo));
 			lessonCtrlObj.update(qnNo,lessonPlan,studRespObj.get());
 
-			// // code for incorporating layout settings. 
-			// // Problem with passOpt$. kiv until app is written in ionic. 
-			// if(currQnSpec.settings.layoutTemplate){
-			// 	var layoutName=currQnSpec.settings.layoutTemplate
-			// 	var baseProdUrl="http://gabrielwu84.dlinkddns.com/clicker-prod/layout"
+			// code for incorporating layout settings. 
+			// Problem with passOpt$. kiv until app is written in ionic. 
+			if(typeof(currQnSpec.settings)!=="undefined" 
+			&& typeof(currQnSpec.settings.layoutTemplate)!=="undefined"){
+				var layoutName=currQnSpec.settings.layoutTemplate;
+				var baseProdUrl="http://gabrielwu84.dlinkddns.com/clicker-prod/layout"
 				
-			// 	var oldQnStemDom=document.getElementById("qnStem");
-			// 	var oldQnOptsDom=document.getElementById("qnOpts");
-			// 	var oldQnRespDom=document.getElementById("qnResp");
-			// 	$("#lesson-main").load(baseProdUrl+"/"+layoutName+".html",function(){
-			// 		$("#qnStem").replaceWith(oldQnStemDom);
-			// 		$("#qnOpts").replaceWith(oldQnOptsDom);
-			// 		$("#qnResp").replaceWith(oldQnRespDom);
-			// 	})
-			// }
-			
+				var oldQnStemDom=document.getElementById("qnStem");
+				var oldQnOptsDom=document.getElementById("qnOpts");
+				var oldQnRespDom=document.getElementById("qnResp");
+				console.log(layoutName)
+				$("#lesson-main").load(baseProdUrl+"/"+layoutName+".html",function(){
+					$("#qnStem").replaceWith(oldQnStemDom);
+					$("#qnOpts").replaceWith(oldQnOptsDom);
+					$("#qnResp").replaceWith(oldQnRespDom);
+				})
+			}
+
+			// // watch qnResp for change in dimension. 
+			// $("#qnResp").resize(function(){
+			// 	console.log("resize")
+			// 	// call youVote.resize().
+			// })
 		}
 		this.currQnNo=function(){
 			return qnNo;
