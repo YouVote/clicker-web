@@ -87,6 +87,8 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 			lessonIdDom=document.getElementById("lesson-id");
 			lessonIdDom.innerHTML=lessonId;
 			paginator.setDom("page-lesson");
+			lessonObj=new lessonModelEngine(lessonPlan,youVote);
+			lessonObj.playQnById(0);
 		}
 	);
 	youVote.setKernelParam(
@@ -106,8 +108,5 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	youVote.setKernelParam("viewMarkAnswered",studentViewObj.markAnswered);
 	youVote.setKernelParam("viewRestorePrevAnswered",studentViewObj.resetAnswered);
 	youVote.setKernelParam("yvProdBaseAddr","https://youvote.github.io/clicker-prod/");
-	// add navDotsObj
-	lessonObj=new lessonModelEngine(lessonPlan,youVote);
-	// pass Doms in. 
-	lessonObj.playQnById(0);
+	youVote.connect();
 })

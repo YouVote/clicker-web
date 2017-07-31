@@ -57,24 +57,13 @@ define([],function(){
 			if(typeof(currQnSpec.settings)!=="undefined" 
 			&& typeof(currQnSpec.settings.layoutTemplate)!=="undefined"){
 				var layoutName=currQnSpec.settings.layoutTemplate;
-				var baseProdUrl="http://gabrielwu84.dlinkddns.com/clicker-prod/layout"
-				
-				var oldQnStemDom=document.getElementById("qnStem");
-				var oldQnOptsDom=document.getElementById("qnOpts");
-				var oldQnRespDom=document.getElementById("qnResp");
-				console.log(layoutName)
+				var baseProdUrl="http://gabrielwu84.dlinkddns.com/clicker-prod/layout";
 				$("#lesson-main").load(baseProdUrl+"/"+layoutName+".html",function(){
-					$("#qnStem").replaceWith(oldQnStemDom);
-					$("#qnOpts").replaceWith(oldQnOptsDom);
-					$("#qnResp").replaceWith(oldQnRespDom);
+					youVote.swapDom("stemDiv",$("#qnStem"))
+					youVote.swapDom("optDiv",$("#qnOpts"))
+					youVote.swapDom("respDiv",$("#qnResp"))
 				})
 			}
-
-			// // watch qnResp for change in dimension. 
-			// $("#qnResp").resize(function(){
-			// 	console.log("resize")
-			// 	// call youVote.resize().
-			// })
 		}
 		this.currQnNo=function(){
 			return qnNo;
