@@ -7,6 +7,7 @@ require.config({
 	],
 	paths:{
 		"jquery":"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min",
+		"socket-router":"https://youvote.github.io/socket-router/main",
 		"bootstrap":"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min",
 		"d3js":"https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.0/d3.min",
 		"vue":"https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue",
@@ -28,7 +29,9 @@ require(["webKernel","lessonctrl","studentview","lessonmodel"],
 function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	var lessonPlan=sessionStorage.getItem('lessonPlan');
 	lessonPlan=JSON.parse(lessonPlan);
-	var socketURL=config.socketURL;
+
+	// looks like there's no need for socketURL to be defined here
+	// var socketURL=config.socketURL;
 
 	// integrate navdots with lessonCtrl
 	navDotObj=new (function navDot(navDotDiv){
@@ -101,6 +104,7 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 		}
 	);
 	// to change socketio-server address, do it through
+	// depricated further - done through socketio-router path in require, but can be overriden here further.
 	// youVote.setKernelParam("socketServerURL"," https://avalon-gabrielwu84.rhcloud.com/socket.io/socket.io ");
 	youVote.setKernelParam("yvWebKernelBaseAddr","yvWebKernel/");
 	youVote.setKernelParam("viewAddStudent",studentViewObj.addStudent);

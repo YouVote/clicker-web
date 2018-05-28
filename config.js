@@ -1,5 +1,6 @@
 var config={
-	socketURL:"https://avalon-gabrielwu84.rhcloud.com:8443",
+// looks like there's no need for socketURL to be defined here
+// socketURL:"https://avalon-gabrielwu84.rhcloud.com:8443",
 
 // needed for compatibility with dev
 	webCoreBaseAddr:"qcore/",
