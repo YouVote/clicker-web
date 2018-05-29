@@ -4,10 +4,11 @@ require.config({
 	packages:[
 		{"name":"webKernel","location":"../yvWebKernel"},
 		{"name":"ctype","location":config.baseProdUrl+"ctype/"},
+		{"name":"async","location":config.baseProdUrl+"async/"},
 	],
 	paths:{
-		"jquery":"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min",
 		"socket-router":"https://youvote.github.io/socket-router/main",
+		"jquery":"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min",
 		"bootstrap":"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min",
 		"d3js":"https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.0/d3.min",
 		"vue":"https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue",
@@ -29,7 +30,6 @@ require(["webKernel","lessonctrl","studentview","lessonmodel"],
 function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	var lessonPlan=sessionStorage.getItem('lessonPlan');
 	lessonPlan=JSON.parse(lessonPlan);
-
 	// looks like there's no need for socketURL to be defined here
 	// var socketURL=config.socketURL;
 
@@ -112,6 +112,6 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	youVote.setKernelParam("viewMarkDisconnected",studentViewObj.markDisconnected);
 	youVote.setKernelParam("viewMarkAnswered",studentViewObj.markAnswered);
 	youVote.setKernelParam("viewRestorePrevAnswered",studentViewObj.resetAnswered);
-	youVote.setKernelParam("yvProdBaseAddr","https://youvote.github.io/clicker-prod/");
+	youVote.setKernelParam("yvProdBaseAddr",config.baseProdUrl);
 	youVote.connect();
 })
