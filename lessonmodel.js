@@ -56,7 +56,6 @@ define([],function(){
 			lessonCtrlObj.update(qnNo,lessonPlan,studRespObj.get());
 
 			// code for incorporating layout settings. 
-			// Problem with passOpt$. kiv until app is written in ionic. 
 			if(typeof(currQnSpec.settings)!=="undefined" 
 			&& typeof(currQnSpec.settings.layoutTemplate)!=="undefined"){
 				var layoutName=currQnSpec.settings.layoutTemplate;
