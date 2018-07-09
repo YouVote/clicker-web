@@ -47,6 +47,9 @@ define([],function(){
 			}
 		}
 		function execQn(){
+			// TODO: insert resilient spec system code here
+			// parse would add default values to modName, modParams and qnSpec if they were not specified. 
+			// currQnSpec=parse(lessonPlan[qnNo]);
 			currQnSpec=lessonPlan[qnNo];
 			youVote.execQn(currQnSpec.qnStem,currQnSpec.modName,
 				currQnSpec.modParams,studRespObj.get(qnNo));
