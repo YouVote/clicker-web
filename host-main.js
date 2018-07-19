@@ -81,7 +81,7 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	studentViewObj=new studentViewEngine(
 		document.getElementById("student-box")
 	);
-
+	
 	youVote=new webKernel("#qnStem","#qnOpts","#qnResp","head");
 	youVote.setKernelParam(
 		"onConnectPass",
@@ -106,7 +106,7 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 	// to change socketio-server address, do it through
 	// depricated further - done through socketio-router path in require, but can be overriden here further.
 	// youVote.setKernelParam("socketServerURL"," https://avalon-gabrielwu84.rhcloud.com/socket.io/socket.io ");
-	youVote.setKernelParam("yvWebKernelBaseAddr","yvWebKernel/");
+	// youVote.setKernelParam("yvWebKernelBaseAddr","yvWebKernel/"); // kiv - may be depricated or may not. if no problem after a while, safe to delete.  
 	youVote.setKernelParam("viewAddStudent",studentViewObj.addStudent);
 	youVote.setKernelParam("viewMarkReconnected",studentViewObj.markReconnected);
 	youVote.setKernelParam("viewMarkDisconnected",studentViewObj.markDisconnected);

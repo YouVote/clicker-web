@@ -55,17 +55,17 @@ define([],function(){
 				currQnSpec.modParams,studRespObj.get(qnNo));
 			lessonCtrlObj.update(qnNo,lessonPlan,studRespObj.get());
 
-			// code for incorporating layout settings. 
-			if(typeof(currQnSpec.settings)!=="undefined" 
-			&& typeof(currQnSpec.settings.layoutTemplate)!=="undefined"){
-				var layoutName=currQnSpec.settings.layoutTemplate;
-				var baseProdUrl="http://gabrielwu84.dlinkddns.com/clicker-prod/layout";
-				$("#lesson-main").load(baseProdUrl+"/"+layoutName+".html",function(){
-					youVote.swapDom("stemDiv",$("#qnStem"))
-					youVote.swapDom("optDiv",$("#qnOpts"))
-					youVote.swapDom("respDiv",$("#qnResp"))
-				})
-			}
+			// // code for incorporating layout settings. 
+			// if(typeof(currQnSpec.settings)!=="undefined" 
+			// && typeof(currQnSpec.settings.layoutTemplate)!=="undefined"){
+			// 	var layoutName=currQnSpec.settings.layoutTemplate;
+			// 	var baseProdUrl="http://gabrielwu84.dlinkddns.com/clicker-prod/layout"; 
+			// 	$("#lesson-main").load(baseProdUrl+"/"+layoutName+".html",function(){
+			// 		youVote.swapDom("stemDiv",$("#qnStem"))
+			// 		youVote.swapDom("optDiv",$("#qnOpts"))
+			// 		youVote.swapDom("respDiv",$("#qnResp"))
+			// 	})
+			// }
 		}
 		this.currQnNo=function(){
 			return qnNo;

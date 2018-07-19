@@ -117,19 +117,13 @@
 				<div id='student-box' style="background-color:#dddddd;padding:2px 2px;">
 				</div>
 			</section>
-			<section id="lesson-main">
+			<section id="lesson-main" style="display:flex; flex-flow:column;">
 			<!-- abstracting this start -->				
-				<div style="display:table; table-layout:fixed; width:100%; padding:40px;">
-					<div style="display:table-column-group; ">
-						<div style="display:table-column; width:100%;"></div>
-						<div style="display:table-column; width:290px;"></div>
-					</div>
-					<div style="display:table-row;">
-						<div id='qnStem' style="display:table-cell;line-height:150%; margin:20px;font-size:20px;"></div>
-						<div id='qnOpts' style="display:table-cell; vertical-align:top;margin:40px;font-size:40px;"></div> 
-					</div>
+				<div style="flex-grow:1; display:flex; flex-flow:row; padding:20px;">
+						<div id='qnStem' style="flex-grow:1; display: inline-block; line-height:150%; margin:30px; font-size:25px;">Stem</div>
+						<div id='qnOpts' style="flex-grow:1; display: inline-block; margin:30px; font-size:25px;">Opts</div> 
 				</div>
-				<div id='qnResp' style="display:table-cell;padding-left:20px;"></div>
+				<div id='qnResp' style="flex-grow:1; overflow:hidden; padding:0px;"></div>
 			<!-- abstracting this end -->
 			</section>
 		</div>

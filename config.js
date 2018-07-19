@@ -7,6 +7,6 @@ var config={
 
 // change this when pushing to live
 // try to automatically detect current url
-// config.baseProdUrl="http://127.0.0.1/proj-clicker/clicker-prod/";
+	// baseProdUrl:"http://localhost/clicker-prod/"
 	baseProdUrl:"https://youvote.github.io/clicker-prod/"
 };
