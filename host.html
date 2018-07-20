@@ -34,6 +34,20 @@
 				height:100%;
 				margin:0px;
 			}
+			/* Make scrollbars less intrusive (in case not really needed), but still allow scroll (if needed). 
+			   (e.g. if height renders a few pixels off, which occurs frequently.) */
+			body::-webkit-scrollbar {
+				width: 5px;
+			}
+			body::-webkit-scrollbar-track {
+				background: #fff; 
+			}
+			body::-webkit-scrollbar-thumb {
+				background: #fff; 
+			}
+			body::-webkit-scrollbar-thumb:hover {
+				background: #eee; 
+			}
 			.page{
 				margin:0px;	height:100%;width:100%;	display:block;position:absolute;
 			}
@@ -117,13 +131,21 @@
 				<div id='student-box' style="background-color:#dddddd;padding:2px 2px;">
 				</div>
 			</section>
-			<section id="lesson-main" style="display:flex; flex-flow:column;">
+			<section id="lesson-main" style="display:flex; flex-flow:column;height:100%;">
 			<!-- abstracting this start -->				
-				<div style="flex-grow:1; display:flex; flex-flow:row; padding:20px;">
+				<!-- <div style="flex-grow:1; display:flex; flex-flow:row; padding:20px;">
 						<div id='qnStem' style="flex-grow:1; display: inline-block; line-height:150%; margin:30px; font-size:25px;">Stem</div>
 						<div id='qnOpts' style="flex-grow:1; display: inline-block; margin:30px; font-size:25px;">Opts</div> 
 				</div>
-				<div id='qnResp' style="flex-grow:1; overflow:hidden; padding:0px;"></div>
+				<div id='qnResp' style="flex-grow:1; overflow:hidden; padding:0px;"></div> -->
+				<div style="padding:20px; display:flex; flex-flow:row;">
+						<div id='qnStem' style=" display: inline-block; line-height:150%; margin:30px; font-size:25px;">Stem</div>
+						<div id='qnOpts' style="display: inline-block; margin:30px; font-size:25px;">Opts</div> 
+				</div>
+				<div style="width:0px;height:0px;overflow:visible;">
+					<div id="respDiv" style="position:absolute;"></div>
+				</div>
+				<div id="respGhost" style="flex-grow:1;"></div>
 			<!-- abstracting this end -->
 			</section>
 		</div>

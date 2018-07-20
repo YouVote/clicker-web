@@ -82,7 +82,7 @@ function(webKernel,lessonCtrlEngine,studentViewEngine,lessonModelEngine){
 		document.getElementById("student-box")
 	);
 	
-	youVote=new webKernel("#qnStem","#qnOpts","#qnResp","head");
+	youVote=new webKernel("#qnStem","#qnOpts","#respDiv","#respGhost","head");
 	youVote.setKernelParam(
 		"onConnectPass",
 		function(lessonId){
