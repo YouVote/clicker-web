@@ -60,13 +60,20 @@
 				sessionStorage.setItem('lessonPlan', lessonPlanText);
 				window.location="host.html";
 			}
+			function redirectToLite(){
+				window.location="../clicker-lite";
+			}
 			function readTextFile (f) {
-				var reader = new FileReader();
-				reader.onload=function(){
-					var lessonPlan = reader.result;
-					beginLesson(lessonPlan);
+				if(typeof(f)!="undefined"){
+					var reader = new FileReader();
+					reader.onload=function(){
+						var lessonPlan = reader.result;
+						beginLesson(lessonPlan);
+					}
+					reader.readAsText(f);
+				} else {
+					redirectToLite();
 				}
-				reader.readAsText(f);
 			}
 
 			function getParams() {
